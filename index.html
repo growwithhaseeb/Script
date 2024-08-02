@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed Haseeb's Articles</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            text-align: center;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-bottom: 1px solid #ddd;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: #333;
+        }
+        header p {
+            margin: 0;
+            font-size: 1rem;
+            color: #666;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .intro {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: #666;
+        }
+        .script-section {
+            margin-bottom: 1.5rem;
+        }
+        .script-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .dropdown-button {
+            background-color: #ffffff;
+            color: #333;
+            border: 1px solid #ddd;
+            padding: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .dropdown-button:hover {
+            background-color: #f0f0f0;
+            border-color: #ccc;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            margin-top: 8px;
+        }
+        .dropdown-content a {
+            color: #333;
+            padding: 12px;
+            text-decoration: none;
+            display: block;
+            font-size: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+        .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+        .dropdown-content .description {
+            font-size: 0.875rem;
+            color: #666;
+            margin-top: 2px;
+        }
+        .description {
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            color: #666;
+        }
+        .content {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .content h3 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            color: #333;
+        }
+        .content p {
+            font-size: 1rem;
+            color: #666;
+        }
+        .code-container {
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .copy-button {
+            display: inline-block;
+            margin-bottom: 5px; /* Reduced margin to tighten spacing */
+            border: 1px solid #000;
+            background-color: #fff;
+            color: #000;
+            padding: 4px 8px; /* Adjusted padding for a smaller button */
+            font-size: 0.75rem; /* Smaller font size */
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .copy-button:hover {
+            background-color: #000;
+            color: #fff;
+        }
+        .code-area {
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
+            overflow: auto;
+            white-space: pre;
+            box-sizing: border-box;
+            margin-top: 5px; /* Reduced margin to align better with button */
+        }
+        .show {
+            display: block;
+        }
+        .form-section {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .form-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .form-section p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .mandatory {
+            color: red;
+            margin-left: 0.25rem;
+        }
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .form-buttons button {
+            flex: 1;
+            padding: 0.75rem;
+            font-size: 1rem;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-buttons button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-top: -1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mohamed Haseeb</h1>
+        <p>Sr. Performance Marketing Strategist</p>
+    </header>
+    <div class="container">
+        <div class="intro">
+            <p>Welcome to my collection of performance marketing scripts. Here, you'll find a range of tools and techniques that can help enhance your marketing strategies and drive results.</p>
+        </div>
+        <section class="script-section">
+            <h2>Scripts</h2>
+            <div class="dropdown">
+                <button class="dropdown-button">Select a Script</button>
+                <div class="dropdown-content">
+                    <a href="#" data-content="content1">
+                        Script 1
+                        <div class="description">Automates ad placement and bidding.</div>
+                    </a>
+                    <a href="#" data-content="content2">
+                        Script 2
+                        <div class="description">Analyzes audience engagement.</div>
+                    </a>
+                    <a href="#" data-content="content3">
+                        Script 3
+                        <div class="description">Tracks conversion rates and adjusts tactics.</div>
+                    </a>
+                </div>
+            </div>
+            <div class="description" id="default-description">
+                <p>These scripts are designed to provide actionable insights and automation for your marketing efforts. Feel free to explore and implement them to optimize your campaigns.</p>
+            </div>
+            <div class="content" id="content1">
+                <h3>Script 1</h3>
+                <p>This script automates ad placement and bidding to optimize your ad campaigns. Use this tool to streamline your ad management and enhance your bidding strategies.</p>
+                <h4>Sample Code:</h4>
+                <div class="code-container">
+                    <button class="copy-button" data-target="content1">Copy Code</button>
+                    <pre class="code-area">
+function automateAdBidding() {
+    // Sample code for automating ad bidding
+    console.log("Automating ad bidding...");
+}
+automateAdBidding();
+                    </pre>
+                </div>
+            </div>
+            <div class="content" id="content2">
+                <h3>Script 2</h3>
+                <p>This script analyzes audience engagement to provide insights into user interactions. Implement this to gauge the effectiveness of your content and engagement strategies.</p>
+                <h4>Sample Code:</h4>
+                <div class="code-container">
+                    <button class="copy-button" data-target="content2">Copy Code</button>
+                    <pre class="code-area">
+function analyzeEngagement() {
+    // Sample code for analyzing audience engagement
+    console.log("Analyzing audience engagement...");
+}
+analyzeEngagement();
+                    </pre>
+                </div>
+            </div>
+            <div class="content" id="content3">
+                <h3>Script 3</h3>
+                <p>This script tracks conversion rates and adjusts tactics based on performance data. Implement this script to dynamically optimize your marketing strategies based on real-time results.</p>
+                <h4>Sample Code:</h4>
+                <div class="code-container">
+                    <button class="copy-button" data-target="content3">Copy Code</button>
+                    <pre class="code-area">
+function trackConversions() {
+    // Sample code for tracking conversions
+    console.log("Tracking conversions...");
+}
+trackConversions();
+                    </pre>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Form Section -->
+    <div class="container">
+        <section class="form-section">
+            <h2>Get in Touch</h2>
+            <p>Fill out the form below to book a personalized Google Ads training session or a consultation. We will get back to you shortly.</p>
+            <form id="contact-form">
+                <label for="name">Name <span class="mandatory">*</span></label>
+                <input type="text" id="name" name="name">
+                
+                <label for="email">Email <span class="mandatory">*</span></label>
+                <input type="email" id="email" name="email">
+                
+                <label for="designation">Designation <span class="mandatory">*</span></label>
+                <input type="text" id="designation" name="designation">
+                
+                <div class="error" id="error-message"></div>
+                
+                <div class="form-buttons">
+                    <button type="button" name="request" value="training" id="training-button">Book Google Ads Training</button>
+                    <button type="button" name="request" value="consultation" id="consultation-button">Book Consultation</button>
+                </div>
+            </form>
+        </section>
+    </div>
+    <script>
+        let lastOpenedContent = null;
+
+        document.querySelector('.dropdown-button').addEventListener('click', function() {
+            const dropdownContent = document.querySelector('.dropdown-content');
+            dropdownContent.classList.toggle('show');
+
+            // Collapse any open content when the dropdown is toggled
+            if (lastOpenedContent && dropdownContent.classList.contains('show')) {
+                lastOpenedContent.style.display = 'none';
+                lastOpenedContent = null; // Reset the last opened content
+                document.getElementById('default-description').style.display = 'block';
+            }
+        });
+
+        document.querySelectorAll('.dropdown-content a').forEach(item => {
+            item.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default anchor click behavior
+                const contentId = this.getAttribute('data-content');
+                const selectedContent = document.getElementById(contentId);
+                const defaultDescription = document.getElementById('default-description');
+
+                // Hide previously opened content
+                if (lastOpenedContent && lastOpenedContent !== selectedContent) {
+                    lastOpenedContent.style.display = 'none';
+                }
+
+                // Toggle the selected content visibility
+                if (selectedContent.style.display === 'block') {
+                    selectedContent.style.display = 'none';
+                    lastOpenedContent = null;
+                    defaultDescription.style.display = 'block'; // Show default description
+                } else {
+                    selectedContent.style.display = 'block';
+                    defaultDescription.style.display = 'none'; // Hide default description
+                    lastOpenedContent = selectedContent;
+                }
+
+                // Hide dropdown after selection
+                document.querySelector('.dropdown-content').classList.remove('show');
+            });
+        });
+
+        // Copy code functionality
+        document.querySelectorAll('.copy-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const codeBlock = this.nextElementSibling.textContent;
+                navigator.clipboard.writeText(codeBlock).then(() => {
+                    alert('Code copied to clipboard!');
+                }).catch(err => {
+                    console.error('Failed to copy code: ', err);
+                });
+            });
+        });
+
+        // Close dropdown when clicking outside of it
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('.dropdown-button')) {
+                const dropdowns = document.getElementsByClassName('dropdown-content');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        });
+
+        // Handle form button clicks to set action and subject
+        function handleFormSubmission(requestType) {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const designation = document.getElementById('designation').value.trim();
+            const errorMessage = document.getElementById('error-message');
+            
+            if (!name || !email || !designation) {
+                errorMessage.textContent = 'All fields are required.';
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                errorMessage.textContent = 'Please enter a valid email address.';
+                return;
+            }
+            
+            let subject, body;
+            if (requestType === 'training') {
+                subject = 'Google Ads Training Booking';
+                body = `Name: ${name}\nEmail: ${email}\nDesignation: ${designation}\n\nRequesting a Google Ads training session.`;
+            } else if (requestType === 'consultation') {
+                subject = 'Consultation Booking';
+                body = `Name: ${name}\nEmail: ${email}\nDesignation: ${designation}\n\nRequesting a consultation.`;
+            }
+            
+            const mailtoLink = `mailto:devhaseeb.11.9@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+        }
+
+        function validateEmail(email) {
+            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        document.getElementById('training-button').addEventListener('click', function() {
+            handleFormSubmission('training');
+        });
+
+        document.getElementById('consultation-button').addEventListener('click', function() {
+            handleFormSubmission('consultation');
+        });
+    </script>
+</body>
+</html>
